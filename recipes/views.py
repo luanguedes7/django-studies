@@ -26,7 +26,15 @@ def category(request, category_id):
     })
 
 def recipe(request, id):
+    recipe = Recipe.objects.filter(
+        pk=id,
+        is_published = True,
+    ).order_by('-id').first()
+
+    if not recipe:
+        raise Http404('Not found! :(')
+
     return render(request, 'recipes/pages/recipe-template.html', context={
-        'recipe':make_recipe(),
+        'recipe':recipe,
         'is_detail_page': True
     })
