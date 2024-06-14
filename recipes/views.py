@@ -57,3 +57,4 @@ def search(request):
         'page_title': f'Search for "{search_term}"',
         'recipes': recipes,
     })
+
