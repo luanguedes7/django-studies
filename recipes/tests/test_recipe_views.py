@@ -93,6 +93,11 @@ class RecipeViewsTest(RecipeTestBase):
 
         # Check if one recipe exists
         self.assertIn(needed_title, content)
+
+    def test_recipe_search_uses_correct_view_function(self):
+        url = reverse('recipes-search')
+        resolved = resolve(url)
+        self.assertIs(resolved.func, views.search)
     
     
    
