@@ -19,6 +19,25 @@ class RegisterForm(forms.ModelForm):
         add_placeholder(self.fields['password'], 'Type your password')
         add_placeholder(self.fields['password2'], 'Repeat your password')
 
+    first_name = forms.CharField(
+        required=True,
+        error_messages={'required': 'Write your first name'},
+        label='First name',
+    )
+    
+    last_name = forms.CharField(
+        required=True,
+        error_messages={'required': 'Write your last name'},
+        label='Last name',
+    )
+    
+    email = forms.EmailField(
+        required=True,
+        error_messages={'required': 'Email is required'},
+        label='E-mail',
+    )
+
+
     password = forms.CharField(
         required=True,
         widget=forms.PasswordInput(),
@@ -30,12 +49,15 @@ class RegisterForm(forms.ModelForm):
             'one lowercase letter and one number. The length should be '
             'at least 8 characters.'
         ),
-        label='Password'
+        label='Password',
     )
     password2 = forms.CharField(
         required=True,
         widget=forms.PasswordInput(),
-        label='Password2'
+        label='Password2',
+        error_messages={
+            'required': 'Please, repeat your password'
+        },
     )
 
     class Meta:
@@ -49,7 +71,4 @@ class RegisterForm(forms.ModelForm):
         ]
         labels = {
             'username': 'Username',
-            'first_name': 'First name',
-            'last_name': 'Last name',
-            'email': 'E-mail'
         }
