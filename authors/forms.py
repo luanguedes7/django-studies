@@ -29,11 +29,13 @@ class RegisterForm(forms.ModelForm):
             'Password must have at least one uppercase letter, '
             'one lowercase letter and one number. The length should be '
             'at least 8 characters.'
-        )
+        ),
+        label='Password'
     )
     password2 = forms.CharField(
         required=True,
-        widget=forms.PasswordInput()
+        widget=forms.PasswordInput(),
+        label='Password2'
     )
 
     class Meta:
@@ -45,27 +47,9 @@ class RegisterForm(forms.ModelForm):
             'email',
             'password'
         ]
-
-    def clean_password(self):
-        data = self.cleaned_data.get('password')
-
-        if 'atenção' in data:
-            raise ValidationError(
-                'Não digite %(pipoca)s no campo password',
-                code='invalid',
-                params={'pipoca': '"atenção"'}
-            )
-
-        return data
-
-    def clean_first_name(self):
-        data = self.cleaned_data.get('first_name')
-
-        if 'John Doe' in data:
-            raise ValidationError(
-                'Não digite %(value)s no campo first name',
-                code='invalid',
-                params={'value': '"John Doe"'}
-            )
-
-        return data
+        labels = {
+            'username': 'Username',
+            'first_name': 'First name',
+            'last_name': 'Last name',
+            'email': 'E-mail'
+        }
